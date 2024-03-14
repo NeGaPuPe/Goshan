@@ -1,0 +1,102 @@
+﻿<Page x:Class="GoshanMarket.Pages.ProfilePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:GoshanMarket.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1250"
+      Title="ProfilePage" Background="WhiteSmoke" Loaded="Page_Loaded">
+    <Viewbox>
+        <Grid Width="1250" Height="650">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="5 24 0 0">
+                    <Border CornerRadius="5" Cursor="Hand" Margin="10 0 0 0" Background="White"  Name="MyProfileButton"  PreviewMouseLeftButtonDown="MyProfileButton_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" Margin="70 0 0 0">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Account" Foreground="#279667" Width="35" Height="35"/>
+                                <TextBlock FontSize="18" Text="Мой профиль" Margin="5 5 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border CornerRadius="5" Margin="10 20 0 20"  Cursor="Hand" MouseEnter="FavouritesButton_MouseEnter" MouseLeave="FavouritesButton_MouseLeave" Name="FavouritesButton" PreviewMouseLeftButtonDown="FavouritesButton_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" Margin="70 0 0 0">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Heart" Foreground="#279667" Width="35" Height="35"/>
+                                <TextBlock FontSize="18" Text="Избранное" Margin="5 5 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border CornerRadius="5" Cursor="Hand" Margin="10 0 0 0" Name="MyOrdersButton" MouseEnter="MyOrdersButton_MouseEnter" MouseLeave="MyOrdersButton_MouseLeave" PreviewMouseLeftButtonDown="MyOrdersButton_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" Margin="70 0 0 0">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="PackageVariantClosed" Foreground="#279667" Width="35" Height="35"/>
+                                <TextBlock FontSize="18" Text="Мои заказы" Margin="5 5 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="540">
+                        <TextBlock Text="Мои данные" FontFamily="Tahoma" FontSize="30" FontWeight="Bold" Margin="-40 15"/>
+                        <Border Background="White" CornerRadius="5" Margin="-40 0 0 0">
+                            <StackPanel Margin="15">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="0 20" Orientation="Vertical">
+                                        <TextBlock Text="Имя *" ToolTip="Обязательное поле" FontSize="15" FontFamily="Tahoma" FontWeight="Medium" Margin="0 0 0 5"/>
+                                        <TextBox Text="{Binding FirstName}" CommandManager.PreviewExecuted="TextBox_PreviewExecuted" PreviewTextInput="TextBox_PreviewTextInput" FontWeight="ExtraLight" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" Name="NameTextBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Width="150"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="10 20" Orientation="Vertical">
+                                        <TextBlock Text="Фамилия" FontSize="15" FontFamily="Tahoma" FontWeight="Medium" Margin="0 0 0 5"/>
+                                        <TextBox Text="{Binding Surname}" CommandManager.PreviewExecuted="TextBox_PreviewExecuted" PreviewTextInput="TextBox_PreviewTextInput" FontWeight="ExtraLight" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" Name="SurNameTextBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Width="150"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0 20" Orientation="Vertical">
+                                        <TextBlock Text="Отчество" FontSize="15" FontFamily="Tahoma" FontWeight="Medium" Margin="0 0 0 5"/>
+                                        <TextBox Text="{Binding Patronymic}" CommandManager.PreviewExecuted="TextBox_PreviewExecuted"  PreviewTextInput="TextBox_PreviewTextInput" FontWeight="ExtraLight" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" Name="PatronymicTextBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Width="150"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel>
+                                        <TextBlock FontFamily="Tahoma" Text="Дата рождения" FontSize="15" FontWeight="Medium"/>
+                                        <DatePicker Language="ru-RU"  Focusable="False" FontWeight="ExtraLight"   materialDesign:HintAssist.IsFloating="False" Height="50" Width="175"  Style="{StaticResource MaterialDesignOutlinedDatePicker}" HorizontalAlignment="Left" Margin="0 10 0 20" Name="DateBirthPicker" Text="{Binding DateBirth,StringFormat={}{0:yyyy.MM.dd}}">
+                                            <DatePicker.CalendarStyle>
+                                                <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                    <Style.Resources>
+                                                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#279667"/>
+                                                    </Style.Resources>
+                                                </Style>
+                                            </DatePicker.CalendarStyle>
+                                        </DatePicker>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <TextBlock FontFamily="Tahoma" Text="Пол" FontSize="15" FontWeight="Medium"/>
+                                        <StackPanel Orientation="Vertical" Margin="0 5">
+                                            <RadioButton Name="MaleRButton" Margin="0 0 0 5">
+                                                <TextBlock FontWeight="ExtraLight"  Text="Мужской" Margin="0 -2 0 0"/>
+                                            </RadioButton>
+                                            <RadioButton Name="FemaleRButton" VerticalContentAlignment="Center">
+                                                <TextBlock FontWeight="ExtraLight"  Text="Женский" Margin="0 -2 0 0"/>
+                                            </RadioButton>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Margin="0 10" Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock FontFamily="Tahoma" Text="Эл. почта *" ToolTip="Обязательное поле" FontSize="15" FontWeight="Medium" Margin="0 0 0 5"/>
+                                            <TextBox PreviewTextInput="EmailTextBox_PreviewTextInput" CommandManager.PreviewExecuted="TextBox_PreviewExecuted" FontWeight="ExtraLight" Text="{Binding EmailAddress}" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" Name="EmailTextBox" Style="{StaticResource MaterialDesignOutlinedTextBox}" HorizontalAlignment="Left" Width="150"/>
+                                        </StackPanel>
+                                        <Button x:Name="SaveButtonButton" Margin="470 25 0 0" Click="SaveButtonButton_Click" Width="130" Height="47"  Foreground="White" Background="#279667" Content="Сохранить"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Page>

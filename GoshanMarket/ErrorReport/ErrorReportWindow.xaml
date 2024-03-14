@@ -1,0 +1,52 @@
+﻿<Window x:Class="GoshanMarket.ErrorReport.ErrorReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:GoshanMarket.ErrorReport"
+        mc:Ignorable="d"
+        Title="ErrorReport" Height="230" Width="350" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Background="Transparent">
+    <Grid>
+        <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ElevationAssist.Elevation="Dp2" Margin="2 2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="80*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Background="#279667">
+                        <TextBlock Name="TextTitle"  Text="Fatal Error" Foreground="White" FontWeight="Bold" FontSize="18" VerticalAlignment="Center"  TextAlignment="Left" Margin="10 7"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="80*"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Name="MessageIcon" Grid.Column="0" Kind="Error" Foreground="IndianRed" VerticalAlignment="Center" HorizontalAlignment="Center" Width="70" Height="70"/>
+                    <TextBlock Name="MessageText"  Grid.Column="1" FontWeight="Light" VerticalAlignment="Center" Text="Приложение столкнулось с критической ошибкой. Отправить отчёт об ошибке?" TextWrapping="Wrap" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TextBox  SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" x:Name="EmailAddressTextBox" Width="220" VerticalAlignment="Center" Height="48"  materialDesign:HintAssist.Hint="Укажите почту для связи с вами." VerticalContentAlignment="Center" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0 0 0 15"/>
+                </Grid>
+                <Grid Grid.Row="3" Margin="0 -3 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonYes" Foreground="White" Grid.Column="1" Background="#279667" BorderBrush="Transparent" Content="Да" Click="ButtonYes_Click"/>
+                    <Button x:Name="ButtonNo" Foreground="White" Grid.Column="2" Background="IndianRed" BorderBrush="Transparent" Content="Нет" Click="ButtonNo_Click"/>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

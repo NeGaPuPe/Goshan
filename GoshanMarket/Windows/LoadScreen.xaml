@@ -1,0 +1,36 @@
+﻿<Window x:Class="GoshanMarket.Windows.LoadScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:GoshanMarket.Windows"
+        mc:Ignorable="d"
+        Title="LoadScreen" Height="650" Width="1250" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="{x:Null}" ContentRendered="Window_ContentRendered">
+    <Grid>
+        <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="25">
+            <Grid>
+                <StackPanel>
+                    <TextBlock Text="Добро пожаловать" FontSize="34" Foreground="IndianRed" FontWeight="ExtraLight" Width="550" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="290 250 0 -140">
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="0" Color="#279667" Opacity="1" BlurRadius="5"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                    <Border CornerRadius="5"  Width="500"  Height="45" Margin="15 10 0 0">
+                        <StackPanel>
+                            <ProgressBar BorderBrush="Black" Foreground="IndianRed" BorderThickness="0.001" Height="7" Width="500" x:Name="LoadProgressBar" Value="0" >
+                                <ProgressBar.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Color="LawnGreen" Opacity="1" BlurRadius="15"/>
+                                </ProgressBar.Effect>
+                            </ProgressBar>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Name="LoadPercent" FontWeight="ExtraLight" Margin="10 10 0 0" FontSize="17" VerticalAlignment="Center"/>
+                                <TextBlock HorizontalAlignment="Center" FontWeight="ExtraLight" FontSize="17" Margin="0 10 0 0" Text="%" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>

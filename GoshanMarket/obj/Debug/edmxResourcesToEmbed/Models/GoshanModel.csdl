@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GoshanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Basket">
+    <Key>
+      <PropertyRef Name="BasketID" />
+    </Key>
+    <Property Name="BasketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Basket__ClientID__48CFD27E" FromRole="Basket" ToRole="Client" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Basket__ProductI__47DBAE45" FromRole="Basket" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__Categor__5165187F" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Precision="0" />
+    <Property Name="PasswordClient" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GenderID" Type="Int32" />
+    <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__ClientID__48CFD27E" FromRole="Client" ToRole="Basket" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Client__GenderID__49C3F6B7" FromRole="Client" ToRole="Gender" />
+    <NavigationProperty Name="Favorites" Relationship="Self.FK__Favorites__Clien__4AB81AF0" FromRole="Client" ToRole="Favorites" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order__ClientID__4CA06362" FromRole="Client" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Favorites">
+    <Key>
+      <PropertyRef Name="FavoritesID" />
+    </Key>
+    <Property Name="FavoritesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Favorites__Clien__4AB81AF0" FromRole="Favorites" ToRole="Client" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Favorites__Produ__4BAC3F29" FromRole="Favorites" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__GenderID__49C3F6B7" FromRole="Gender" ToRole="Client" />
+  </EntityType>
+  <EntityType Name="GoshanPoint">
+    <Key>
+      <PropertyRef Name="PointID" />
+    </Key>
+    <Property Name="PointID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NamePoint" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AddressPoint" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order__PointID__4D94879B" FromRole="GoshanPoint" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateOrder" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <Property Name="PointID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Order__ClientID__4CA06362" FromRole="Order" ToRole="Client" />
+    <NavigationProperty Name="GoshanPoint" Relationship="Self.FK__Order__PointID__4D94879B" FromRole="Order" ToRole="GoshanPoint" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Order__StatusID__4E88ABD4" FromRole="Order" ToRole="StatusOrder" />
+    <NavigationProperty Name="OrderList" Relationship="Self.FK__OrderList__Order__5070F446" FromRole="Order" ToRole="OrderList" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderListID" />
+    </Key>
+    <Property Name="OrderListID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderList__Order__5070F446" FromRole="OrderList" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderList__Produ__4F7CD00D" FromRole="OrderList" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+    <Property Name="ProductPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PhotoName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Basket" Relationship="Self.FK__Basket__ProductI__47DBAE45" FromRole="Product" ToRole="Basket" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__5165187F" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Favorites" Relationship="Self.FK__Favorites__Produ__4BAC3F29" FromRole="Product" ToRole="Favorites" />
+    <NavigationProperty Name="OrderList" Relationship="Self.FK__OrderList__Produ__4F7CD00D" FromRole="Product" ToRole="OrderList" />
+  </EntityType>
+  <EntityType Name="StatusOrder">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order__StatusID__4E88ABD4" FromRole="StatusOrder" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK__Basket__ClientID__48CFD27E">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Basket">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Basket__ProductI__47DBAE45">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Basket">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Categor__5165187F">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__GenderID__49C3F6B7">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorites__Clien__4AB81AF0">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Favorites">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__ClientID__4CA06362">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorites__Produ__4BAC3F29">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Favorites">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__PointID__4D94879B">
+    <End Role="GoshanPoint" Type="Self.GoshanPoint" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GoshanPoint">
+        <PropertyRef Name="PointID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="PointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__StatusID__4E88ABD4">
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderList__Order__5070F446">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderList__Produ__4F7CD00D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GoshanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Basket" EntityType="Self.Basket" />
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Favorites" EntityType="Self.Favorites" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="GoshanPoint" EntityType="Self.GoshanPoint" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderList" EntityType="Self.OrderList" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" />
+    <AssociationSet Name="FK__Basket__ClientID__48CFD27E" Association="Self.FK__Basket__ClientID__48CFD27E">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Basket" EntitySet="Basket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Basket__ProductI__47DBAE45" Association="Self.FK__Basket__ProductI__47DBAE45">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Basket" EntitySet="Basket" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Categor__5165187F" Association="Self.FK__Product__Categor__5165187F">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__GenderID__49C3F6B7" Association="Self.FK__Client__GenderID__49C3F6B7">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorites__Clien__4AB81AF0" Association="Self.FK__Favorites__Clien__4AB81AF0">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Favorites" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__ClientID__4CA06362" Association="Self.FK__Order__ClientID__4CA06362">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorites__Produ__4BAC3F29" Association="Self.FK__Favorites__Produ__4BAC3F29">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favorites" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__PointID__4D94879B" Association="Self.FK__Order__PointID__4D94879B">
+      <End Role="GoshanPoint" EntitySet="GoshanPoint" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__StatusID__4E88ABD4" Association="Self.FK__Order__StatusID__4E88ABD4">
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderList__Order__5070F446" Association="Self.FK__OrderList__Order__5070F446">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderList" EntitySet="OrderList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderList__Produ__4F7CD00D" Association="Self.FK__OrderList__Produ__4F7CD00D">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderList" EntitySet="OrderList" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

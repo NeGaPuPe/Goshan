@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fc3cad60a7b4966aebddb8097a02cbb" Name="Diagram1">
+        <EntityTypeShape EntityType="GoshanModel.Basket" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Category" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Client" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Favorites" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Gender" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.GoshanPoint" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Order" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.OrderList" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.Product" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GoshanModel.StatusOrder" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="GoshanModel.FK__Basket__ClientID__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Basket__ProductI__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Product__Categor__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Client__GenderID__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Favorites__Clien__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Order__ClientID__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Favorites__Produ__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Order__PointID__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__Order__StatusID__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__OrderList__Order__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="GoshanModel.FK__OrderList__Produ__4F7CD00D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

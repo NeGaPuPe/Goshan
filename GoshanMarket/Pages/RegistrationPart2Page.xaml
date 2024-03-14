@@ -1,0 +1,29 @@
+﻿<Page x:Class="GoshanMarket.Pages.RegistrationPart2Page"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GoshanMarket.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1250"
+      Title="RegistrationPart2Page" Background="WhiteSmoke">
+
+    <Viewbox>
+        <Grid Width="1250" Height="650">
+            <Grid>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontSize="22" FontFamily="Tahoma" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 20">Регистрация</TextBlock>
+                    <TextBox PreviewTextInput="VerificationTextBox_PreviewTextInput" SelectionBrush="DodgerBlue" MaxLength="6" materialDesign:HintAssist.IsFloating="False" x:Name="VerificationTextBox" Width="330" VerticalAlignment="Center" Height="50" materialDesign:HintAssist.Hint="Код подтверждения" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <Border Cursor="Hand" x:Name="VerificationBorder" PreviewMouseLeftButtonDown="VerificationBorder_PreviewMouseLeftButtonDown">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
+                            <materialDesign:PackIcon Kind="Reload" Foreground="Gray" Margin="0 -3 5 0" Width="25" Height="25"/>
+                            <TextBlock  FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Text="Отправить код ещё раз"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Width="170" Name="RegButton" Height="47" Click="RegButton_Click"  Foreground="White" Margin="0 20" Background="#279667" Content="Зарегистрироваться"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Page>

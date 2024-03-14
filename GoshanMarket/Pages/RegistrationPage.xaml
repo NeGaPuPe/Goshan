@@ -1,0 +1,25 @@
+﻿<Page x:Class="GoshanMarket.Pages.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GoshanMarket.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1250"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="RegistrationPage" Background="WhiteSmoke">
+
+    <Viewbox>
+        <Grid Width="1250" Height="650">
+            <Grid>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontSize="22" FontFamily="Tahoma"  FontWeight="Bold" HorizontalAlignment="Center" Margin="0 20" Text="Регистрация"/>
+                    <TextBox  x:Name="NameTextBox" CommandManager.PreviewExecuted="TextBox_PreviewExecuted" PreviewTextInput="NameTextBox_PreviewTextInput" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False"  Width="330" VerticalAlignment="Center" Height="50" materialDesign:HintAssist.Hint="Имя*" Margin="0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBox x:Name="EmailAddressTextBox" CommandManager.PreviewExecuted="TextBox_PreviewExecuted" PreviewTextInput="EmailAddressTextBox_PreviewTextInput" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False"  Width="330" VerticalAlignment="Center" Height="50" materialDesign:HintAssist.Hint="Эл. почта*" Margin="0 10" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <PasswordBox VerticalContentAlignment="Center" x:Name="PasswordTextBox" SelectionBrush="DodgerBlue" materialDesign:HintAssist.IsFloating="False" Width="330" VerticalAlignment="Center" Height="50" materialDesign:HintAssist.Hint="Пароль*" Margin="0 10" Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"/>
+                    <Button x:Name="VereficationButton" Click="VereficationButton_Click" Width="170" Height="47"  Foreground="White" Margin="0 20" Background="#279667" Content="Получить код"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Page>

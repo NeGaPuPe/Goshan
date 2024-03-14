@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="goshanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Product__Categor__6C190EBB" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Precision="0" />
+    <Property Name="PasswordClient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GenderID" Type="Int32" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Client__GenderID__60A75C0F" FromRole="Client" ToRole="Gender" />
+    <NavigationProperty Name="Favorites" Relationship="Self.FK__Favorites__Clien__6383C8BA" FromRole="Client" ToRole="Favorites" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order__ClientID__656C112C" FromRole="Client" ToRole="Order" />
+    <NavigationProperty Name="OrderNotAuthtorization" Relationship="Self.FK__OrderNotA__Clien__693CA210" FromRole="Client" ToRole="OrderNotAuthtorization" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NumberPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PasswordEmployee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PositionID" Type="Int32" Nullable="false" />
+    <Property Name="GenderID" Type="Int32" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Employee__Gender__628FA481" FromRole="Employee" ToRole="Gender" />
+    <NavigationProperty Name="Position" Relationship="Self.FK__Employee__Positi__619B8048" FromRole="Employee" ToRole="Position" />
+    <NavigationProperty Name="PassportData" Relationship="Self.FK__PassportD__Emplo__6B24EA82" FromRole="Employee" ToRole="PassportData" />
+  </EntityType>
+  <EntityType Name="Favorites">
+    <Key>
+      <PropertyRef Name="FavoritesID" />
+    </Key>
+    <Property Name="FavoritesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Favorites__Clien__6383C8BA" FromRole="Favorites" ToRole="Client" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Favorites__Produ__6477ECF3" FromRole="Favorites" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="GenderID" />
+    </Key>
+    <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__GenderID__60A75C0F" FromRole="Gender" ToRole="Client" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__Gender__628FA481" FromRole="Gender" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Order__ClientID__656C112C" FromRole="Order" ToRole="Client" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Order__StatusID__66603565" FromRole="Order" ToRole="StatusOrder" />
+    <NavigationProperty Name="OrderList" Relationship="Self.FK__OrderList__Order__6754599E" FromRole="Order" ToRole="OrderList" />
+    <NavigationProperty Name="OrderListNotAuthtorization" Relationship="Self.FK__OrderList__Order__68487DD7" FromRole="Order" ToRole="OrderListNotAuthtorization" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderListID" />
+    </Key>
+    <Property Name="OrderListID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderList__Order__6754599E" FromRole="OrderList" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderList__Produ__01142BA1" FromRole="OrderList" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="OrderListNotAuthtorization">
+    <Key>
+      <PropertyRef Name="OrderListID" />
+    </Key>
+    <Property Name="OrderListID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductID" Type="Int64" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderList__Order__68487DD7" FromRole="OrderListNotAuthtorization" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="OrderNotAuthtorization">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="ClientID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__OrderNotA__Clien__693CA210" FromRole="OrderNotAuthtorization" ToRole="Client" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK__OrderNotA__Statu__6A30C649" FromRole="OrderNotAuthtorization" ToRole="StatusOrder" />
+  </EntityType>
+  <EntityType Name="PassportData">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int64" Nullable="false" />
+    <Property Name="NumberPassport" Type="Int32" Nullable="false" />
+    <Property Name="SeriesPassport" Type="Int32" Nullable="false" />
+    <Property Name="PlaceIssue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateIssue" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__PassportD__Emplo__6B24EA82" FromRole="PassportData" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="PositionID" />
+    </Key>
+    <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__Positi__619B8048" FromRole="Position" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="ProductPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PhotoName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__6C190EBB" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Favorites" Relationship="Self.FK__Favorites__Produ__6477ECF3" FromRole="Product" ToRole="Favorites" />
+    <NavigationProperty Name="OrderList" Relationship="Self.FK__OrderList__Produ__01142BA1" FromRole="Product" ToRole="OrderList" />
+  </EntityType>
+  <EntityType Name="StatusOrder">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Order__StatusID__66603565" FromRole="StatusOrder" ToRole="Order" />
+    <NavigationProperty Name="OrderNotAuthtorization" Relationship="Self.FK__OrderNotA__Statu__6A30C649" FromRole="StatusOrder" ToRole="OrderNotAuthtorization" />
+  </EntityType>
+  <Association Name="FK__Product__Categor__6C190EBB">
+    <End Role="Category" Type="Self.Category" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__GenderID__60A75C0F">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorites__Clien__6383C8BA">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Favorites">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__ClientID__656C112C">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderNotA__Clien__693CA210">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="OrderNotAuthtorization" Type="Self.OrderNotAuthtorization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ClientID" />
+      </Principal>
+      <Dependent Role="OrderNotAuthtorization">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__Gender__628FA481">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="GenderID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="GenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__Positi__619B8048">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="PositionID" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="PositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PassportD__Emplo__6B24EA82">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="PassportData" Type="Self.PassportData" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="PassportData">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Favorites__Produ__6477ECF3">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Favorites">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Order__StatusID__66603565">
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderList__Order__6754599E">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderList__Order__68487DD7">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderListNotAuthtorization" Type="Self.OrderListNotAuthtorization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderListNotAuthtorization">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderList__Produ__01142BA1">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderList" Type="Self.OrderList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderList">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderNotA__Statu__6A30C649">
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="1" />
+    <End Role="OrderNotAuthtorization" Type="Self.OrderNotAuthtorization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="StatusID" />
+      </Principal>
+      <Dependent Role="OrderNotAuthtorization">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GoshanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Category" EntityType="Self.Category" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="Favorites" EntityType="Self.Favorites" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderList" EntityType="Self.OrderList" />
+    <EntitySet Name="OrderListNotAuthtorization" EntityType="Self.OrderListNotAuthtorization" />
+    <EntitySet Name="OrderNotAuthtorization" EntityType="Self.OrderNotAuthtorization" />
+    <EntitySet Name="PassportData" EntityType="Self.PassportData" />
+    <EntitySet Name="Position" EntityType="Self.Position" />
+    <EntitySet Name="Product" EntityType="Self.Product" />
+    <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" />
+    <AssociationSet Name="FK__Product__Categor__6C190EBB" Association="Self.FK__Product__Categor__6C190EBB">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__GenderID__60A75C0F" Association="Self.FK__Client__GenderID__60A75C0F">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorites__Clien__6383C8BA" Association="Self.FK__Favorites__Clien__6383C8BA">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Favorites" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__ClientID__656C112C" Association="Self.FK__Order__ClientID__656C112C">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderNotA__Clien__693CA210" Association="Self.FK__OrderNotA__Clien__693CA210">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="OrderNotAuthtorization" EntitySet="OrderNotAuthtorization" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__Gender__628FA481" Association="Self.FK__Employee__Gender__628FA481">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__Positi__619B8048" Association="Self.FK__Employee__Positi__619B8048">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PassportD__Emplo__6B24EA82" Association="Self.FK__PassportD__Emplo__6B24EA82">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="PassportData" EntitySet="PassportData" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Favorites__Produ__6477ECF3" Association="Self.FK__Favorites__Produ__6477ECF3">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Favorites" EntitySet="Favorites" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__StatusID__66603565" Association="Self.FK__Order__StatusID__66603565">
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderList__Order__6754599E" Association="Self.FK__OrderList__Order__6754599E">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderList" EntitySet="OrderList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderList__Order__68487DD7" Association="Self.FK__OrderList__Order__68487DD7">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderListNotAuthtorization" EntitySet="OrderListNotAuthtorization" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderList__Produ__01142BA1" Association="Self.FK__OrderList__Produ__01142BA1">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderList" EntitySet="OrderList" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderNotA__Statu__6A30C649" Association="Self.FK__OrderNotA__Statu__6A30C649">
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+      <End Role="OrderNotAuthtorization" EntitySet="OrderNotAuthtorization" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

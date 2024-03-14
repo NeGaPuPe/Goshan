@@ -1,0 +1,163 @@
+﻿<Window x:Class="GoshanMarket.Windows.ExecuteOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:GoshanMarket.Windows"
+        mc:Ignorable="d"
+        Title="ExecuteOrderWindow" Height="750" Width="450" WindowStyle="None" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" AllowsTransparency="True" Background="{x:Null}" >
+    <Grid>
+        <Frame Name="OrderFrame"/>
+        <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="25">
+            <Grid>
+                <StackPanel>
+                    <Button Cursor="Hand" Margin="0 5 10 0" x:Name="CloseButton" Click="CloseButton_Click" Height="40" Width="40"  VerticalAlignment="Top" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="WindowClose" Height="30" Width="30"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Left" Margin="40 30 0 0" Text="Куда доставить?" FontWeight="Bold" FontSize="35"/>
+                    <StackPanel Orientation="Horizontal" Margin="40 20 0 15">
+                        <materialDesign:PackIcon Kind="MapMarkerOutline" Width="25" Height="25"  Foreground="Green" VerticalAlignment="Center"/>
+                        <TextBlock Text="Московская область" FontSize="18" TextAlignment="Center" Foreground="Green" FontWeight="Light"/>
+                    </StackPanel>
+                    <Border>
+                        <StackPanel Orientation="Horizontal" Margin="42 0 0 0">
+                            <Border Cursor="Hand" Name="MapButton" MouseEnter="MapButton_MouseEnter" MouseLeave="MapButton_MouseLeave" PreviewMouseLeftButtonDown="MapButton_PreviewMouseLeftButtonDown">
+                                <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
+                                    <materialDesign:PackIcon Foreground="Black" Name="MapI" Kind="MapMarkerOutline" Width="20" Height="20" Margin="0 0 2 0"/>
+                                    <TextBlock Text="Мы на карте" Foreground="Black" Name="MapT" FontWeight="Light" FontSize="16"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Cursor="Hand" Name="PostsButton" MouseEnter="PostsButton_MouseEnter" MouseLeave="PostsButton_MouseLeave" PreviewMouseLeftButtonDown="PostsButton_PreviewMouseLeftButtonDown">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon  Foreground="Black" Name="PostsI" Kind="ShoppingOutline" Width="20" Height="20" Margin="0 0 2 0"/>
+                                    <TextBlock x:Name="PostsT" Foreground="Black" Text="Пункты выдачи" FontWeight="Light" FontSize="16"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                    <Grid>
+                        <Grid>
+                            <ListView materialDesign:RippleAssist.IsDisabled="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="OrdersListView" >
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ListViewItem}">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                    <ContentPresenter />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <StackPanel Name="PostsPanel" Visibility="Visible">
+                                    <RadioButton Name="GoshanSerpRadioButton" VerticalAlignment="Top" VerticalContentAlignment="Top" FontWeight="Light" Margin="40 20 0 50">
+                                        <TextBlock FontSize="13" FontWeight="Light" Text="ГОШАН Серпухов            г.Серпухов, площадь Ленина, д. 4                                             Пн-Пт с 8:30 до 0:00                   Сб-Вс с 8:30 до 0:00" TextWrapping="Wrap" Width="200">
+                                            <TextBlock.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation  To="Green" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation To="Gray" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <RadioButton.RenderTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                        </RadioButton.RenderTransform>
+                                    </RadioButton>
+                                    <RadioButton Name="GoshanIvankiRadioButton" VerticalAlignment="Top" VerticalContentAlignment="Top" FontWeight="Light"  Margin="40 0 0 0" >
+                                        <TextBlock FontSize="13" FontWeight="Light" Text="ГОШАН Ивановские дворики            г.Серпухов, Московское шоссе, д. 98А                                             Пн-Пт с 8:00 до 23:00                   Сб-Вс с 8:00 до 23:00" TextWrapping="Wrap" Width="200">
+                                            <TextBlock.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation  To="Green" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation To="Gray" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <RadioButton.RenderTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                        </RadioButton.RenderTransform>
+                                    </RadioButton>
+                                    <RadioButton Name="GoshanPyshinoRadioButton" VerticalAlignment="Top" VerticalContentAlignment="Top" FontWeight="Light"  Margin="40 60 0 0" >
+                                        <TextBlock FontSize="13" FontWeight="Light" Text="ГОШАН Пущино                   Пущино, 2-я Пролетарская, д. 28                                             Пн-Пт с 8:00 до 23:00                   Сб-Вс с 8:00 до 23:00" TextWrapping="Wrap" Width="200">
+                                            <TextBlock.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseEnter">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation  To="Green" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="TextBlock.MouseLeave">
+                                                            <EventTrigger.Actions>
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <ColorAnimation To="Gray" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"   FillBehavior="HoldEnd" Duration="0:0:0:0.1" AutoReverse="False"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger.Actions>
+                                                        </EventTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        <RadioButton.RenderTransform>
+                                            <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                        </RadioButton.RenderTransform>
+                                    </RadioButton>
+                                </StackPanel>
+                                <Button x:Name="SaveButton" Click="SaveButton_Click" HorizontalAlignment="Center"  Width="150" Height="47"  Foreground="White" Margin="0 100 0 10" Background="#279667" Content="Сохранить"/>
+                            </ListView>
+                        </Grid>
+                        <Grid Visibility="Hidden" x:Name="YandexMapPanel">
+                            <wv2:WebView2 Height="450" Margin="0 10 0 0" Width="350" Name="webView"  Source="https://yandex.ru/map-widget/v1/?um=constructor%3Af8aa68d3aa37759af6ead09f15fa759b09c9b5891673764e9d06fb8236aae003&amp;source=constructor"></wv2:WebView2>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Window>
